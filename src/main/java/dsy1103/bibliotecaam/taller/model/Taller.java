@@ -19,7 +19,7 @@ public class Taller {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTaller;
 
-    @Column(nullable = false,length = 30)
+    @Column(nullable = false,length = 100)
     private String nombreTaller;
 
     @Column(nullable = false)
@@ -28,4 +28,7 @@ public class Taller {
     /*
     AQUI VA: idEmpleado
      */
+
+    @Column(nullable = false)
+    private Long idEmpleado;
 }

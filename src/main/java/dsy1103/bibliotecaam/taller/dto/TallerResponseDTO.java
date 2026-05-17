@@ -17,7 +17,7 @@ public class TallerResponseDTO {
     private String nombreTaller;
 
     private LocalDate fechaTaller;
-    /*
+
     private Long idEmpleado;
-     */
+
 }

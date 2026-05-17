@@ -19,8 +19,7 @@ public class TallerRequestDTO {
     @NotNull(message = "La fecha en la que se realizo el taller debe especificarse: Año-Mes-Dia (EJ: 1990-09-19)")
     private LocalDate fechaTaller;
 
-    /*
     @NotNull(message = "El id del empleado a cargo debe estar presente.")
     private Long idEmpleado;
-     */
+
 }
