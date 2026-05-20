@@ -41,7 +41,7 @@ public class TallerController {
     }
 
     @PostMapping
-    private ResponseEntity<TallerResponseDTO> guardar(@Valid @RequestBody TallerRequestDTO dto, @RequestHeader String token){
+    private ResponseEntity<TallerResponseDTO> guardar(@Valid @RequestBody TallerRequestDTO dto, @RequestHeader("Authorization") String token){
         return ResponseEntity.status(201).body(tallerService.guardar(dto, token));
     }
 
@@ -49,7 +49,7 @@ public class TallerController {
     public ResponseEntity<TallerResponseDTO> actualizar(
             @PathVariable Long id,
             @Valid @RequestBody TallerRequestDTO dto,
-            @RequestHeader String token) {
+            @RequestHeader("Authorization") String token) {
         return tallerService.actualizar(id, dto, token)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
