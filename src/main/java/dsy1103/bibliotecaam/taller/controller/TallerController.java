@@ -56,12 +56,17 @@ public class TallerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id) {
-        tallerService.eliminar(id);
-        Map<String, String> borrado = new LinkedHashMap<>();
-        borrado.put("¡EXITO! ","¡El Taller fue eliminado con exito!");
-        tallerService.eliminar(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(borrado);
+    public ResponseEntity<Map<String, String>> eliminar(@PathVariable Long id) {
+        if (tallerService.obtenerPorId(id).isEmpty()){
+            Map<String, String> borrado = new LinkedHashMap<>();
+            borrado.put("¡ERROR! ", "¡El Taller con id "+id+" no fue encontrado!");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(borrado);
+        }else {
+            tallerService.eliminar(id);
+            Map<String, String> borrado = new LinkedHashMap<>();
+            borrado.put("¡EXITO! ", "¡El Taller fue eliminado con exito!");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(borrado);
+        }
     }
 
 
