@@ -32,7 +32,7 @@ public class TallerController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/pagado")
+    @GetMapping("/nombre/{nombre}")
     public ResponseEntity<List<TallerResponseDTO>> obtenerTallerPorNombre(@PathVariable String nombre) {
         if (tallerService.obtenerPorNombre(nombre).isEmpty()){
             return ResponseEntity.noContent().build();
