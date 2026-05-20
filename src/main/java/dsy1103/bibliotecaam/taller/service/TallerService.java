@@ -32,10 +32,11 @@ public class TallerService {
     }
 
 
-    private void validarEmpleado(Long idEmpleado) {
+    private void validarEmpleado(Long idEmpleado, String token) {
         try {
             webClient.get()
                     .uri("/api/bibliotecaam/empleado/{id}", idEmpleado)
+                    .header("Authorization", token)
                     .retrieve()
                     .bodyToMono(String.class)
                     .block();
@@ -67,8 +68,8 @@ public class TallerService {
         return tallerRepository.findById(id).map(this::mapToDOTO);
     }
 
-    public TallerResponseDTO guardar(TallerRequestDTO dto) {
-        validarEmpleado(dto.getIdEmpleado());
+    public TallerResponseDTO guardar(TallerRequestDTO dto, String token) {
+        validarEmpleado(dto.getIdEmpleado(), token);
         Taller t = new Taller(
                 null,
                 dto.getNombreTaller(),
@@ -77,9 +78,9 @@ public class TallerService {
         return mapToDOTO(tallerRepository.save(t));
     }
 
-    public Optional<TallerResponseDTO> actualizar(Long id, TallerRequestDTO dto) {
+    public Optional<TallerResponseDTO> actualizar(Long id, TallerRequestDTO dto, String token) {
         return tallerRepository.findById(id).map(existente -> {
-            validarEmpleado(dto.getIdEmpleado());
+            validarEmpleado(dto.getIdEmpleado(), token);
             existente.setNombreTaller(dto.getNombreTaller());
             existente.setFechaTaller(dto.getFechaTaller());
             existente.setIdEmpleado(dto.getIdEmpleado());

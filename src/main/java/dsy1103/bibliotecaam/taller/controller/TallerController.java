@@ -41,15 +41,16 @@ public class TallerController {
     }
 
     @PostMapping
-    private ResponseEntity<TallerResponseDTO> guardar(@Valid @RequestBody TallerRequestDTO dto){
-        return ResponseEntity.status(201).body(tallerService.guardar(dto));
+    private ResponseEntity<TallerResponseDTO> guardar(@Valid @RequestBody TallerRequestDTO dto, @RequestHeader String token){
+        return ResponseEntity.status(201).body(tallerService.guardar(dto, token));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<TallerResponseDTO> actualizar(
             @PathVariable Long id,
-            @Valid @RequestBody TallerRequestDTO dto) {
-        return tallerService.actualizar(id, dto)
+            @Valid @RequestBody TallerRequestDTO dto,
+            @RequestHeader String token) {
+        return tallerService.actualizar(id, dto, token)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
