@@ -13,6 +13,6 @@ public class TallerModelAssembler implements RepresentationModelAssembler<Taller
     public EntityModel<TallerResponseDTO> toModel(TallerResponseDTO tallerDto){
         return EntityModel.of(tallerDto,
                 linkTo(methodOn(TallerController.class).obtenerPorId(tallerDto.getIdTaller())).withSelfRel(),
-                linkTo(methodOn(TallerController.class).obtenerTodas()).withRel("talleres"));
+                linkTo(methodOn(TallerController.class).obtenerTodos()).withRel("talleres"));
     }
 }
